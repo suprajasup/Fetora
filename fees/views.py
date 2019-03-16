@@ -4,12 +4,13 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.models import User 
 from fees.models import Profile,FeeHistory
 from django.utils import timezone
-from django.core.mail import send_mail
-from django.core.mail import EmailMessage
-# Create your views here.
+from django.core.mail import send_mail, EmailMessage
+from datetime import timedelta, datetime
+import pytz
+utc = pytz.UTC
+
 def home(request):
 	return render(request,"home.html")
-
 
 def signin(request):
 	if request.method=="POST":
@@ -25,9 +26,6 @@ def signin(request):
 				return redirect("/adminView/")
 			else:
 				return redirect(f"/feesHistory/{user.id}/")
-
-
-			
 
 	return render(request,"login.html")
 
@@ -69,6 +67,10 @@ def about(request):
 	return render(request,"about.html")
 
 
+def contactus(request):
+	return render(request,"contact.html")
+
+
 def feesHistory(request,id):
 	user=User.objects.get(id=id)
 	all_fees=FeeHistory.objects.filter(user=user)
@@ -76,39 +78,36 @@ def feesHistory(request,id):
 
 def adminView(request):
 	users=User.objects.all()
-	# if(user.profile.next_due_date-datetime.date.today==timedelta(days=7))
 
 	return render(request,"adminview.html",{'users':users})
 
 def update(request,id):
 	student=User.objects.get(id=id)
-	# student_fee=FeeHistory.objects.get(id=id)
 
 	if request.method=="POST":
-		
 		amount=request.POST.get('amount',None)
 		paiddate=request.POST.get('paiddate',None)
-		student.profile.next_due_date=student.profile.next_due_date+timedelta(days=30)
-		student.profile.last_paid=paiddate
-		student.profile.save()
+		newdate = datetime.strptime(paiddate,"%Y-%m-%d")
 
-		student_fee=FeeHistory(
-			user=student,
-			paid_date=paiddate,
-			amount=amount)
-		
-		student_fee.save()
+		diff = utc.localize(newdate).date() != student.profile.last_paid.date()
+		print(diff)
+		if diff:
+			student.profile.next_due_date=student.profile.next_due_date+timedelta(days=30)
+			student.profile.last_paid=paiddate
+			student.profile.save()
 
-
+			student_fee=FeeHistory(
+				user=student,
+				paid_date=paiddate,
+				amount=amount)
+			
+			student_fee.save()
+		return redirect("/adminView/")
 	return render(request,"update.html",{'student':student})
 
 def sendmail(request):
-	# student=User.objects.all()
-	# print(student.profile.next_due_date)
+	
 	profiles=Profile.objects.all()
-	# for iterator in profiles:
-	# 	print(iterator.user)
-
 	users = []
 	for profile in profiles:
 
@@ -147,3 +146,6 @@ def sendmail(request):
 	# logic for sending emails from emails list
 	print(users)
 	return HttpResponse("sendmail")
+
+def home1(request):
+	return redirect('/home/')

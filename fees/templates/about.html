@@ -1,22 +1,69 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	<head>
-		<title></title>
-		<link rel="stylesheet" type="text/css" >
+		<!-- <script>
+		$(document).ready(function(){
+		$('[data-toggle="popover"]').popover();
+		});
+		</script> -->
+		<title>Welcome Page</title>
+		 <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
+		
+		
+		
+		<link href='https://fonts.googleapis.com/css?family=Fira Sans' rel='stylesheet'>
+		<!-- <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}"> -->
 		<style>
-			
+		select {
+		width: 296px;
+		
+		}
+		.c h2
+		{
+		font-family:Helvatica;
+		font-size: 68px;
+		text-align: center;
+		padding-top: 30px;
+		padding-left: 35px;
+		}
+		.card {
+		margin: 0 auto; /* Added */
+		float: none; /* Added */
+		margin-bottom: 10px; /* Added */
+		}
 		</style>
+		
 	</head>
 	<body>
-		<div class="card" style="width: 18rem;">
-			<img src="img.jpg" class="card-img-top" alt="">
-			<div class="card-body">
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		<div style="text-align:center" class="container">
+			<br><br>
+			<div class="card  shadow-lg" style="width: 70rem;">
+				<div class="card-body" style="background-color:#dfe6e9;">
+					
+					<p style="font-size:40px;text-align:center;">
+						<b><i>It's designed for your child.</p><p style="font-size:30px;text-align: justify;font-family: sans-serif;">Fetora was born with a vision to help students learn math the right way and overcome the difficulties they face due to traditional blackboard learning.We expose children to a learning system that enables and encourages them to think the <b>Why</b> behind the <b>What</b> of math concepts.We make sure that personal attention is given to the students.  </i></b>
+					</p>
+					
+				</div>
 			</div>
+			<!-- <div class="card  shadow-lg" style="width: 70rem;">
+				<div class="card-body" style="background-color:#f1f2f6;">
+					<a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a> -->
+					<!-- <a href="#" title="Header" data-toggle="popover" data-placement="bottom" data-content="Content">Click</a>
+					
+					<p style="font-size:40px;text-align:justify">
+						<ul>
+							<li>
+								Phone:123
+								email:abc@gmail.com -->
+							<!-- 	
+							</li>
+						</ul>
+					</p> -->
+					
+			
+			<a type="button" class="btn btn-outline-primary btn-lg" href="/signup/">Sign Up</a>
 		</div>
-		
-		
 	</body>
 </html>

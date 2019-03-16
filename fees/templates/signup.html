@@ -1,60 +1,72 @@
 <!DOCTYPE html>
+{%load static %}
 <html>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	<head>
-		<title>Welcome Page</title>
-		 <link rel="stylesheet" type="text/css">
-
+		<title>SIGN UP</title>
+		<link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Fira Sans' rel='stylesheet'>
+		
 		<style>
-    .mydiv {
-      background-color: #2f3542;
-      width:100%;
-      height: 300px;
-    }
-    .mydiv2 {
-      font-size: 28px;
-      box-shadow:3px 3px 0px #444;
-    }
-			
+		select {
+		width: 296px;
+		
+		}
+		.c h2
+		{
+			font-family:Helvatica;
+			font-size: 68px;
+			text-align: center;
+			padding-top: 30px;
+			padding-left: 35px;
+			}
+		.card {
+		margin: 0 auto; /* Added */
+		float: none; /* Added */
+		margin-bottom: 10px; /* Added */
+		}
 		</style>
 	</head>
-<body>
-	<div class="container">
-		<br><br>
-			<div class="container">
-				<br><br>
-				<h2>Signup</h2>
+	<body class="container c">
+		<h2 style="font-family:Fira Sans;">SIGN UP</h2>
+		<div class="card border-dark mb-3 shadow-lg" style="width: 40rem;" >
+			<div class="card-body">
 				<form action="/signup/" method="POST">
 					{% csrf_token %}
-					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Fullname" name="fullname">
-					</div>
-					<div class="form-group">
-						<input class="form-control" type="email" placeholder="email" name="email">
-					</div>
-					<div class="form-group">
-						<input class="form-control" type="username" placeholder="Username" name="username">
-					</div>
-					<div class="form-group">
-						<input class="form-control" type="password" placeholder="Password" name="password">
-					</div>
-
-					<div class="form-group">
-						<input class="form-control" type="number" placeholder="Grade" name="grade">
-					</div>
-					<div class="form-group">
-						<input class="form-control" type="text" placeholder="Board" name="board">
-					</div>
-					<div class="form-group">
-						<input class="form-control" type="date" placeholder="Join Date" name="join_date">
-					</div>
-					
-					<div class="form-group">
-						<input class="btn btn-md btn-success" type="submit">
+					<div class="form-group credentials">
+						<label for="exampleInputEmail1">FullName</label>
+						<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter FullName" name="fullname" required>
+						<h6 style="color:#EA2027;">{{show}}</h6>
+						<br>
+						<div class="form-group">
+							<label for="exampleInputDate1">Email</label>
+							<input class="form-control" type="email" placeholder="Enter email" name="email">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputUsername1">Username</label>
+							<input class="form-control" type="username" placeholder="Enter Username" name="username">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Password</label>
+							<input class="form-control" type="password" placeholder="Enter Password" name="password">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputGrade1">Grade</label>
+							<input class="form-control" type="number" placeholder="Enter Grade" name="grade">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputBoard1">Board</label>
+							<input class="form-control" type="text" placeholder="Enter Board" name="board">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputDate1">Join Date</label>
+							<input class="form-control" type="date" placeholder="Enter Join Date" name="join_date">
+						</div>
+						
+						<div class="form-group">
+							<input class="btn btn-md btn-success" type="submit" placeholder="Sign Up">
+						</div>
 					</div>
 				</form>
-				</div>
-
-
-</body>
-</html>
+			</div>
+		</body>
+	</html>

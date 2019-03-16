@@ -26,9 +26,11 @@ urlpatterns = [
     path('signup/',signup),
     path('login/',signin),
     path('about/',about),
+    path('contactus/',contactus),
     path('feesHistory/<int:id>/',feesHistory),
     path('adminView/',adminView),
     path('update/<int:id>/',update),
-    path('sendmail/',sendmail)
+    path('sendmail/',sendmail),
+    path('',home1),
     
 ]
