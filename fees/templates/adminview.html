@@ -2,45 +2,44 @@
 <html>
 <head>
 	<title>Admin View</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/solar/bootstrap.min.css">
 </head>
 <body>
 	<div class="container">
 		
 	<table class="table table-striped">
 		<tr>
-			<th>User</th>
-			<th>Grade</th>
-			<th>Board</th>
-			<th>Join Date</th>
-			<th>Last Paid</th>
-			<th>Next Due</th>
-			<th>Action</th>
+			<th style="color:#81ecec">User</th>
+			<th style="color:#81ecec">Grade</th>
+			<th style="color:#81ecec">Board</th>
+			<th style="color:#81ecec">Join Date</th>
+			<th style="color:#81ecec">Last Paid</th>
+			<th style="color:#81ecec">Next Due</th>
+			<th style="color:#81ecec">Action</th>
 		</tr>
 	{% for user in users %}
 		<tr>
-			<td>
+			<td style="color:#81ecec">
 				{{user}}
 			</td>
-			<td>
+			<td style="color:#81ecec">
 				{{user.profile.grade}}
 			</td>
-			<td>
+			<td style="color:#81ecec">
 				{{user.profile.board}}
 			</td>
-			<td>
+			<td style="color:#81ecec">
 				{{user.profile.join_date}}
 			</td>
-			<td>
+			<td style="color:#81ecec">
 				{{user.profile.last_paid}}
 			</td>
-			<td>
+			<td style="color:#81ecec">
 				{{user.profile.next_due_date}}
-			</td>
+			</td style="color:#81ecec">
 			<td>
 				<a href="/feesHistory/{{user.id}}" class="btn btn-sm btn-primary">See Fee History</a>
-				<a href="/update/{{user.id}}/" class="btn btn-sm btn-success">Update Payment</a>
+				<a href="/update/{{user.id}}/" class="btn btn-sm btn-secondary">Update Payment</a>
 			</td>
 		</tr>
 	{%endfor%}

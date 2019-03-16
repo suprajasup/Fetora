@@ -85,23 +85,24 @@ def update(request,id):
 	student=User.objects.get(id=id)
 
 	if request.method=="POST":
+
 		amount=request.POST.get('amount',None)
 		paiddate=request.POST.get('paiddate',None)
 		newdate = datetime.strptime(paiddate,"%Y-%m-%d")
 
-		diff = utc.localize(newdate).date() != student.profile.last_paid.date()
-		print(diff)
-		if diff:
-			student.profile.next_due_date=student.profile.next_due_date+timedelta(days=30)
-			student.profile.last_paid=paiddate
-			student.profile.save()
+		# diff = utc.localize(newdate).date() != student.profile.last_paid.date()
+		# print(diff)
+		# if diff:
+		student.profile.next_due_date=student.profile.next_due_date+timedelta(days=30)
+		student.profile.last_paid=paiddate
+		student.profile.save()
 
-			student_fee=FeeHistory(
-				user=student,
-				paid_date=paiddate,
-				amount=amount)
+		student_fee=FeeHistory(
+			user=student,
+			paid_date=paiddate,
+			amount=amount)
 			
-			student_fee.save()
+		student_fee.save()
 		return redirect("/adminView/")
 	return render(request,"update.html",{'student':student})
 
@@ -114,28 +115,30 @@ def sendmail(request):
 
 		if profile.next_due_date is not None:
 			diff = profile.next_due_date - timezone.now()
-			# print(diff.days)
-			if diff.days >=1:
+			print(diff.days)
+			if diff.days >=2:
 				users.append(profile)
-				user = profile.user.email
-				print(user)
+				for user in users:
+					user1 = profile.user.email
+					print(user1)
 
-		
-				# send_mail(
-				# 'Fee Payment Reminder',
-				# 'the due date is coming near.Please make sure you pay it at the earliest.',
-				# 'fetoraApp@gmail.com',
-				# [user],
-				# fail_silently=False,
-			 # )
-			subject="Fee Payment Reminder"
-			message="the due date is coming near.Please make sure you pay it at the earliest."
-			to=[user]
-			from_email='fetoraApp@gmail.com'
+			
+					# send_mail(
+					# 'Fee Payment Reminder',
+					# 'the due date is coming near.Please make sure you pay it at the earliest.',
+					# 'fetoraApp@gmail.com',
+					# [user],
+					# fail_silently=False,
+				 # )
+
+					subject="Fee Payment Reminder"
+					message="the due date is coming near.Please make sure you pay it at the earliest."
+					to=[user1]
+					from_email='fetoraApp@gmail.com'
 
 
-			# message = render_to_string('main/email/email.txt')
-			EmailMessage(subject,message,to=to, from_email=from_email).send()
+				# message = render_to_string('main/email/email.txt')
+					EmailMessage(subject,message,to=to, from_email=from_email).send()
 
 
 			
@@ -144,7 +147,7 @@ def sendmail(request):
 
 	
 	# logic for sending emails from emails list
-	print(users)
+	# print(users)
 	return HttpResponse("sendmail")
 
 def home1(request):
