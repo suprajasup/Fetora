@@ -109,36 +109,39 @@ def update(request,id):
 def sendmail(request):
 	
 	profiles=Profile.objects.all()
-	users = []
+	# users = []
 	for profile in profiles:
 
 
 		if profile.next_due_date is not None:
 			diff = profile.next_due_date - timezone.now()
-			print(diff.days)
-			if diff.days >=2:
-				users.append(profile)
-				for user in users:
-					user1 = profile.user.email
-					print(user1)
+			# print(diff.days)
+			if abs(diff.days) <= 2:
+				# users.append(profile)
+				# print(users)
+				# for user in users:
+				user1 = profile.user.email
+				print(user1)
 
-			
-					# send_mail(
-					# 'Fee Payment Reminder',
-					# 'the due date is coming near.Please make sure you pay it at the earliest.',
-					# 'fetoraApp@gmail.com',
-					# [user],
-					# fail_silently=False,
-				 # )
+		
+				# send_mail(
+				# 'Fee Payment Reminder',
+				# 'the due date is coming near.Please make sure you pay it at the earliest.',
+				# 'fetoraApp@gmail.com',
+				# [user],
+				# fail_silently=False,
+			 # )
 
-					subject="Fee Payment Reminder"
-					message="the due date is coming near.Please make sure you pay it at the earliest."
-					to=[user1]
-					from_email='fetoraApp@gmail.com'
+				subject="Fee Payment Reminder"
+				message="the due date is coming near.Please make sure you pay it at the earliest."
+				to=[user1]
+				from_email='fetoraApp@gmail.com'
 
-
-				# message = render_to_string('main/email/email.txt')
-					EmailMessage(subject,message,to=to, from_email=from_email).send()
+				# print("this is one")
+			# message = render_to_string('main/email/email.txt')
+				# EmailMessage(subject,message,to=to, from_email=from_email).send()
+				msg = EmailMessage(subject, message, to=[user1])
+				msg.send()
 
 
 			
